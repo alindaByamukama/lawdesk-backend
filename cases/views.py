@@ -33,3 +33,14 @@ class CaseNoteCreateView(generics.CreateAPIView):
         case_id = self.kwargs.get('pk')
         case = get_object_or_404(CaseFile, pk=case_id, owner=self.request.user)
         serializer.save(case=case, author=self.request.user)
+
+class CaseDetailView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+    queryset = CaseFile.objects.all()
+    serializer_class = CaseListSerializer
+
+    def get_object(self):
+        obj = super().get_object()
+        if obj.owner_id != self.request.user.id:
+            raise NotFound("Case not found.")
+        return obj
