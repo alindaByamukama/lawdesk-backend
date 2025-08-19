@@ -21,4 +21,4 @@ class CaseListSerializer(serializers.ModelSerializer):
 class CaseCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CaseFile
-        fields = ['owner', 'client_name', 'case_number', 'court', 'status', 'next_hearing_date']
+        fields = ['client_name', 'case_number', 'court', 'status', 'next_hearing_date']
