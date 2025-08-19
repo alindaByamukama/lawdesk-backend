@@ -131,3 +131,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173']
+SECRET_KEY = os.getenv('DJANGO_SECRET', SECRET_KEY)
+DEBUG = bool(int(os.getenv('DJANGO_DEBUG', '1')))
+ALLOWED_HOSTS = ['*']
