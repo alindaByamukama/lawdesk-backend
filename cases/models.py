@@ -25,3 +25,8 @@ class CaseFile(models.Model):
             models.Index(fields=['next_hearing_date']),
         ]
 
+class Note(models.Model):
+    case = models.ForeignKey(CaseFile, on_delete=models.CASCADE, related_name='notes')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notes')
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
