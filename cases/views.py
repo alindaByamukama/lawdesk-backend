@@ -8,3 +8,16 @@ from .serializers import CaseListSerializer, CaseCreateSerializer, NoteSerialize
 class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return getattr(obj, 'owner_id', None) == request.user.id
+
+class CaseListCreateView(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CaseListSerializer
+
+    def get_queryset(self):
+        return CaseFile.objects.filter(owner=self.request.user).order_by('id')
+    
+    def get_serializer_class(self):
+        return CaseCreateSerializer if self.request.method == 'POST' else CaseListSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
