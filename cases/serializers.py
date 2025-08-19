@@ -9,7 +9,8 @@ class NoteSerializer(serializers.ModelSerializer):
 
 class CaseListSerializer(serializers.ModelSerializer):
     last_note = serializers.SerializerMethodField()
-
+    next_hearing_date = serializers.DateField(format="%Y-%m-%d", input_formats=["%Y-%m-%d"], required=False)
+    
     class Meta:
         model = CaseFile
         fields = ['id', 'client_name', 'case_number', 'court', 'status', 'next_hearing_date', 'created_at', 'last_note']
