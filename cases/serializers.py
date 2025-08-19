@@ -6,7 +6,7 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ['id', 'case', 'author', 'body', 'created_at']
 
-class CaseFileSerializer(serializers.ModelSerializer):
+class CaseListSerializer(serializers.ModelSerializer):
     last_note = serializers.SerializerMethodField()
 
     class Meta:
