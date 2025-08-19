@@ -9,6 +9,7 @@ class CaseFile(models.Model):
         ('OPEN', 'Open'),
         ('CLOSED', 'Closed'),
         ('ADJOURNED', 'Adjourned'),
+        ('PENDING', 'Pending'),
     ]
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='case_files')
     client_name = models.CharField(max_length=255)
