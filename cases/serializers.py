@@ -41,6 +41,13 @@ class CaseCreateSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True,
     )
+    status = serializers.CharField(required=False, default="OPEN")
+
+    def validate_status(self, v):
+        aliases = {"pending": "PENDING", "open": "OPEN", "adjourned": "ADJOURNED", "closed": "CLOSED"}
+        key = v.strip().upper()
+        return aliases.get(v.strip().lower(), key)
+    
     class Meta:
         model = CaseFile
         fields = ['client_name', 'case_number', 'court', 'status', 'next_hearing_date']
