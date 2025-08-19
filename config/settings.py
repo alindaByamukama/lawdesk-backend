@@ -141,3 +141,4 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173']
 SECRET_KEY = os.getenv('DJANGO_SECRET', SECRET_KEY)
 DEBUG = bool(int(os.getenv('DJANGO_DEBUG', '1')))
 ALLOWED_HOSTS = ['*']
+APPEND_SLASH=False
