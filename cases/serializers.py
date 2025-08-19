@@ -21,6 +21,7 @@ class CaseListSerializer(serializers.ModelSerializer):
         return {'id': note.id, 'body': note.body, 'created_at': note.created_at} if note else None
 
 class CaseCreateSerializer(serializers.ModelSerializer):
+    next_hearing_date = serializers.DateField(required=False, allow_null=True)
     class Meta:
         model = CaseFile
         fields = ['client_name', 'case_number', 'court', 'status', 'next_hearing_date']
