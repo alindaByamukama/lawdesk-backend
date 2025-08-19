@@ -21,3 +21,12 @@ class CaseListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+class CaseNoteCreateView(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = NoteSerializer
+
+    def perform_create(self, serializer):
+        case_id = self.kwargs.get('pk')
+        case = get_object_or_404(CaseFile, pk=case_id, owner=self.request.user)
+        serializer.save(case=case, author=self.request.user)
