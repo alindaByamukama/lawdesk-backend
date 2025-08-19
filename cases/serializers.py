@@ -13,6 +13,7 @@ class CaseListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CaseFile
         fields = ['id', 'owner', 'client_name', 'case_number', 'court', 'status', 'next_hearing_date', 'created_at', 'last_note']
+        read_only_fields = ['created_at']
 
     def get_last_note(self, obj):
         note = obj.notes.order_by('-created_at').first()
