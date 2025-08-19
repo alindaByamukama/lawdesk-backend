@@ -143,6 +143,13 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',
     )
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'LawDesk API',
+    'DESCRIPTION': 'Backend-only MVP for matters, notes, next hearing date.',
+    'VERSION': '0.1.0',
+}
+
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173']
 SECRET_KEY = os.getenv('DJANGO_SECRET', SECRET_KEY)
 DEBUG = bool(int(os.getenv('DJANGO_DEBUG', '1')))
