@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from django.shortcuts import get_object_or_404
@@ -12,9 +12,12 @@ class IsOwner(permissions.BasePermission):
 class CaseListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = CaseListSerializer
+    filterset_fields = {'status': ['exact'], 'next_hearing_date': ['gte', 'lte']}
+    search_fields = ['client_name', 'case_number']
+    ordering_fields = ['next_hearing_date', 'created_at']
 
     def get_queryset(self):
-        return CaseFile.objects.filter(owner=self.request.user).order_by('id')
+        return CaseFile.objects.filter(owner=self.request.user).order_by('-id')
     
     def get_serializer_class(self):
         return CaseCreateSerializer if self.request.method == 'POST' else CaseListSerializer
