@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .model import CaseFile, Note
+from .models import CaseFile, Note
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
