@@ -44,3 +44,11 @@ class CaseDetailView(generics.RetrieveAPIView):
         if obj.owner_id != self.request.user.id:
             raise NotFound("Case not found.")
         return obj
+    
+class CaseNoteListView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = NoteSerializer
+
+    def get_queryset(self):
+        return Note.objects.filter(
+            case_id=self.kwargs['pk'], case__owner=self.request.user).order_by('-created_at')
