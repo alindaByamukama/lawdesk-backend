@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'djoser',
     'cases',
+    'drf_spectacular',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
